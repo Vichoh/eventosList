@@ -1,6 +1,7 @@
 //server
 module.exports=function(io, cancion){
 	
+
 	io.sockets.on('connection', function(socket) {
 		
 		console.log('Bienvenido');
@@ -29,24 +30,62 @@ module.exports=function(io, cancion){
 			console.log(response);
 
 			var cantidad = 0;
-			var numeroCancionMasRepetida = 0;
-			var aux = cancion.find({nombre:i+1}).count();
-			for (var i = 0; i < 4; i++) {
-				var aux = cancion.find({nombre:i+1}).count();
-				console.log(aux);
-				if (cantidad <  aux) {
-					cantidad = aux;
-					numeroCancionMasRepetida = i+1;
-				};
-			};
-			console.log(numeroCancionMasRepetida);
+			var listaCanciones = 0;
+			listaCanciones = ['We_Are_Your_Friends.mp3','Love20u.mp3','Heathens.mp3','Elysium.mp3'];
+			var numeroCantidadCanciones = [];
+			var icont = 0;
+			for (var i = listaCanciones.length ; i > 0 ; i--) {
 
-			var nombreCancion = "Love20u.mp3";
-			socket.emit('nombreCancion', nombreCancion);
+				
+
+				cancion.find({nombre:i}).count(function (err,docs){
+					
+					numeroCantidadCanciones.push ([docs]);
+					console.log(numeroCantidadCanciones);
+
+					if (numeroCantidadCanciones.length == 4 ) {
+
+						console.log("aca es = a 4");
+						for (var i = numeroCantidadCanciones.length ; i > 0; i--) {
+							if (cantidad <  numeroCantidadCanciones[i]) {
+								cantidad = numeroCantidadCanciones[i];
+								icont = i;
+							
+
+
+							};
+				
+						};
+						console.log(icont);
+						socket.emit('nombreCancion', listaCanciones[icont ]);
+					};
+
+				
+
+				});
+
+				
+			};
+					
+
+
+			
 		})
 
 
 
+		socket.on('borrarColeccion', function(response){
+			console.log(response);
+
+			cancion.remove(function (err){
+				if (err)
+					console.log(err)
+				else
+					console.log(err)
+			});
+
+		}); 
+			
 
 	 });
 

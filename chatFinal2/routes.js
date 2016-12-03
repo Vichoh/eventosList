@@ -33,7 +33,7 @@ app.use(express.static('public'));
 app.use('/jquery', express.static(path.join(__dirname, 'node_modules', 'jquery', 'dist')));
 
 
-
+ 
 
 app.get('/canciones',function(req,res){
   fs.readFile(path.join(__dirname, 'canciones.json'), 'utf8', function(err, canciones){

@@ -47,6 +47,7 @@ $(function(){
 				
 		
 			socket.emit('cancionSiguiente', "termino" );
+			socket.emit('borrarColeccion', "Borrado");
 
 			socket.on('nombreCancion', function (response){
 					audio.attr('src', '/canciones/' + response);
@@ -62,4 +63,4 @@ $(function(){
 
 	cargarCanciones();
 	
-});
+}); 
