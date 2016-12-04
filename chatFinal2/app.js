@@ -16,4 +16,4 @@ var cancion = require('./models/CancionesModels').cancionch;
 
 require('./config')(app);
 require('./routes')(app, path, fs, mediaserver, multer, express);
-require('./events')(io, cancion);
+require('./events')(io, cancion, path, fs);
