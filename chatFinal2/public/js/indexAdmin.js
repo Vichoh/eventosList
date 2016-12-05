@@ -40,6 +40,8 @@ $(function(){
 		//audio[0].pause();
 		audio.attr('src', '/canciones/' + evento.data.nombre);
 		audio[0].play();
+		socket.emit('borrarColeccionTitulo', "Borrado");
+		listaCancionesSiguientes ();
 
 		
 		reproductor.addEventListener("ended",function(){
@@ -53,9 +55,16 @@ $(function(){
 					audio.attr('src', '/canciones/' + response);
 					audio[0].play();
 				})
+			socket.emit('borrarColeccionTitulo', "Borrado");
+			listaCancionesSiguientes ();
+
 			
 		});
 		
+	}
+
+	function listaCancionesSiguientes () {
+		socket.emit('guardarCanciones', 'porfavor elige 4 y guardalas en la base')
 	}
 
 	

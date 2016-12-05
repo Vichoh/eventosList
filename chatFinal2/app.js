@@ -13,7 +13,9 @@ var port 				= process.env.PORT || 8000,
 								);
 
 var cancion = require('./models/CancionesModels').cancionch;
+var titulo = require('./models/TituloModels').tituloch;
+
 
 require('./config')(app);
 require('./routes')(app, path, fs, mediaserver, multer, express);
-require('./events')(io, cancion, path, fs);
+require('./events')(io, cancion, path, fs, titulo);
